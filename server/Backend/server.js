@@ -5,6 +5,7 @@ import axios from "axios";
 import path from "path";
 import "dotenv/config";
 import { fileURLToPath } from "url";
+import { responseData } from "./responseData.js";
 
 const app = express();
 
@@ -24,12 +25,26 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages", "home.html"));
 });
 
-// Route to handle widget
+// Route to handle fetching recommendations
 app.get("/taboola/widgets", async (req, res) => {
-  console.log(`App geting!`);
-  const { id } = req.query;
-  console.log(id);
-  res.json(id);
+  try {
+    const response = await axios.get(process.env.BASE_URL, {
+      params: {
+        "app.type": "desktop",
+        "app.apikey": process.env.API_KEY,
+        count: 4,
+        "source.type": "video",
+        "source.id": "214321562187",
+        "source.url": "http://www.site.com/videos/214321562187.html",
+      },
+    });
+
+    // res.json(response.data);
+    res.json(responseData);
+  } catch (error) {
+    console.error("Error fetching data from Taboola API:", error);
+    res.status(500).send("Error fetching data from Taboola API");
+  }
 });
 
 // Start the server and listen on port 3000 or 8000

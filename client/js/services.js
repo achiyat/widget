@@ -1,15 +1,13 @@
 // client\js\services.js
 console.log("services.js loaded");
 
-export const getWidgetFromAPI = async (_id = "") => {
+export const getWidgetFromAPI = async () => {
   try {
-    console.log(_id);
     const endpoint = "http://localhost:3000/taboola/widgets";
-    let response = await axios.get(endpoint, {
-      params: { id: _id },
-    });
+    let response = await axios.get(endpoint);
     console.log("Data fetched successfully:", response);
-    return response;
+    // console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error("Error fetching widget data:", error);
   }
