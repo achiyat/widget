@@ -5,7 +5,6 @@ import axios from "axios";
 import path from "path";
 import "dotenv/config";
 import { fileURLToPath } from "url";
-import { responseData } from "./responseData.js";
 
 const app = express();
 
@@ -32,15 +31,14 @@ app.get("/taboola/widgets", async (req, res) => {
       params: {
         "app.type": "desktop",
         "app.apikey": process.env.API_KEY,
-        count: 4,
+        count: 6,
         "source.type": "video",
-        "source.id": "214321562187",
-        "source.url": "http://www.site.com/videos/214321562187.html",
+        "source.id": "123456",
+        "source.url": "http://www.site.com/videos/123456.html",
       },
     });
 
-    // res.json(response.data);
-    res.json(responseData);
+    res.json(response.data);
   } catch (error) {
     console.error("Error fetching data from Taboola API:", error);
     res.status(500).send("Error fetching data from Taboola API");
@@ -50,8 +48,5 @@ app.get("/taboola/widgets", async (req, res) => {
 // Start the server and listen on port 3000 or 8000
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(process.env.PORT);
-  console.log(process.env.BASE_URL);
-  console.log(process.env.API_KEY);
   console.log(`Server is running on http://localhost:${PORT}`);
 });

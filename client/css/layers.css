@@ -1,0 +1,41 @@
+/* client\css\layers.css */
+/* Specific styles for the "layers" design */
+
+.layer-design {
+  flex: 1 1 calc(33.333% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.media-container {
+  position: relative;
+  height: 175px;
+  background-color: #f0f0f0;
+}
+
+.media-container .media {
+  width: 100%;
+  height: 100%;
+}
+
+.title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.layer-design .article-title {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.layer-design .branding {
+  margin-top: 15px;
+}
