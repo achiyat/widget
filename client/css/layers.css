@@ -39,3 +39,37 @@
 .layer-design .branding {
   margin-top: 15px;
 }
+
+@media (max-width: 1200px) {
+  .media-container {
+    height: 160px;
+  }
+}
+
+@media (max-width: 991px) {
+  .media-container {
+    height: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .layer-design {
+    flex: 1 1 calc(50% - 10px);
+  }
+
+  .media-container {
+    height: 140px;
+  }
+}
+
+@media (max-width: 575px) {
+  .media-container {
+    height: 130px;
+  }
+}
+
+@media (max-width: 420px) {
+  .media-container {
+    height: 120px;
+  }
+}

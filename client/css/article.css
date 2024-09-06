@@ -23,3 +23,37 @@
 .content-container .article-title {
   margin-bottom: 5px;
 }
+
+@media (max-width: 1200px) {
+  .article-design .media {
+    height: 160px;
+  }
+}
+
+@media (max-width: 991px) {
+  .article-design .media {
+    height: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .article-design {
+    flex: 1 1 calc(50% - 10px);
+  }
+
+  .article-design .media {
+    height: 140px;
+  }
+}
+
+@media (max-width: 575px) {
+  .article-design .media {
+    height: 130px;
+  }
+}
+
+@media (max-width: 420px) {
+  .article-design .media {
+    height: 120px;
+  }
+}

@@ -11,10 +11,12 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   padding: 20px;
+  max-width: 1240px; /* Default max-width for desktop */
+  margin: 0 auto;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 24px; /* Default font-size for desktop */
   margin-bottom: 10px;
 }
 
@@ -29,13 +31,13 @@ hr {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 1200px;
+  max-width: 1200px; /* Default max-width */
   margin: 0 auto;
 }
 
-/* common to all designs */
+/* Common media styling */
 .media {
-  width: 100%;
+  width: 100%; /* Width remains 100% */
   border-radius: 5px;
   background-color: #f0f0f0;
 }
@@ -45,12 +47,115 @@ video {
 }
 
 .article-title {
-  font-size: 18px;
+  font-size: 18px; /* Default font-size for desktop */
   text-align: left;
 }
 
 .branding {
-  font-size: 14px;
+  font-size: 14px; /* Default font-size for desktop */
   color: #777;
   text-align: left;
+}
+
+/* Responsive Sizes and Font Adjustments */
+@media (max-width: 1200px) {
+  body {
+    max-width: 1032px;
+  }
+
+  #widget-container {
+    max-width: 992px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .article-title {
+    font-size: 17px;
+  }
+
+  .branding {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 991px) {
+  body {
+    max-width: 808px;
+  }
+
+  #widget-container {
+    max-width: 768px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .article-title {
+    font-size: 16px;
+  }
+
+  .branding {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    max-width: 616px;
+  }
+
+  #widget-container {
+    max-width: 576px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .article-title {
+    font-size: 15px;
+  }
+
+  .branding {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  body {
+    max-width: 100%;
+  }
+
+  #widget-container {
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  .article-title {
+    font-size: 14px;
+  }
+
+  .branding {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  h2 {
+    font-size: 14px;
+  }
+
+  .article-title {
+    font-size: 13px;
+  }
+
+  .branding {
+    font-size: 11px;
+  }
 }
