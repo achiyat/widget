@@ -56,10 +56,10 @@ app.get("/test/widgets", async (req, res) => {
       params: {
         "app.type": appType || "desktop",
         "app.apikey": apikey || process.env.API_KEY,
-        count: count || 6, // Default to 6 if not provided
-        "source.type": sourceType || "video", // Default to video if not provided
-        "source.id": sourceId || "123456", // Default to a static ID if not provided
-        "source.url": sourceUrl || "http://www.site.com/videos/123456.html", // Default URL if not provided
+        count: count || 6,
+        "source.type": sourceType || "video",
+        "source.id": sourceId || "123456",
+        "source.url": sourceUrl || "http://www.site.com/videos/123456.html",
       },
     });
 

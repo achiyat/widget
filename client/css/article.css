@@ -8,7 +8,7 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures the image and content are spaced */
+  justify-content: space-between;
 }
 
 .content-container {

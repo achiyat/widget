@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const recommendations = await getWidgetFromAPI();
     if (recommendations) {
       // Choose a design type: 'article', 'list', or 'layers'
-      const designType = "list";
+      const designType = "article";
       renderWidget(recommendations, designType);
     }
   } catch (error) {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function renderWidget(data, designType) {
+export const renderWidget = (data, designType) => {
   const widgetContainer = document.getElementById("widget-container");
 
   // Clear existing content
@@ -47,10 +47,10 @@ function renderWidget(data, designType) {
 
     widgetContainer.appendChild(recommendationItem);
   });
-}
+};
 
 // Design 1: "Article" style (3 articles per row)
-function renderArticleDesign(item, container) {
+export function renderArticleDesign(item, container) {
   container.classList.add("article-design");
 
   // Media (image, gif, video) - top of the card
@@ -79,7 +79,7 @@ function renderArticleDesign(item, container) {
 }
 
 // Design 2: "List" style (2 articles per row)
-function renderListDesign(item, container) {
+export function renderListDesign(item, container) {
   container.classList.add("list-design");
 
   // Media on the left
@@ -105,7 +105,7 @@ function renderListDesign(item, container) {
 }
 
 // Design 3: "Layers" style (3 articles per row)
-function renderLayerDesign(item, container) {
+export function renderLayerDesign(item, container) {
   container.classList.add("layer-design");
 
   // Create a container for the image and title
@@ -144,15 +144,15 @@ function renderLayerDesign(item, container) {
 }
 
 // Function to get the media element based on file type
-function getMediaElement(url) {
+export const getMediaElement = (url) => {
   const extension = url.split(".").pop();
   let element;
 
   if (extension === "mp4") {
     element = document.createElement("video");
     element.src = url;
-    element.autoplay = true; // Automatically start playing
-    element.loop = true; // Loop the video when it ends
+    element.autoplay = true; // start playing
+    element.loop = true;
     element.muted = true; // Mute the video
     element.playsInline = true; // Ensures it plays inline on mobile browsers
   } else {
@@ -162,16 +162,15 @@ function getMediaElement(url) {
   }
 
   return element;
-}
+};
 
 // Function to truncate text after a specified number of characters
-function truncateText(text, maxLength = 60) {
-  // If the text length exceeds the max length, truncate it and add ellipsis
+export const truncateText = (text, maxLength = 60) => {
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-}
+};
 
 // Function to calculate time ago
-function getTimeAgo(createdDate) {
+export const getTimeAgo = (createdDate) => {
   const now = new Date();
   const created = new Date(createdDate);
   const diffInSeconds = Math.floor((now - created) / 1000);
@@ -186,4 +185,4 @@ function getTimeAgo(createdDate) {
     const weeks = Math.floor(diffInSeconds / 604800);
     return `${weeks} weeks ago`;
   }
-}
+};

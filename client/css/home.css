@@ -11,12 +11,12 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   padding: 20px;
-  max-width: 1240px; /* Default max-width for desktop */
+  max-width: 1240px;
   margin: 0 auto;
 }
 
 h2 {
-  font-size: 24px; /* Default font-size for desktop */
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
@@ -31,13 +31,13 @@ hr {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-width: 1200px; /* Default max-width */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 /* Common media styling */
 .media {
-  width: 100%; /* Width remains 100% */
+  width: 100%;
   border-radius: 5px;
   background-color: #f0f0f0;
 }
@@ -47,12 +47,12 @@ video {
 }
 
 .article-title {
-  font-size: 18px; /* Default font-size for desktop */
+  font-size: 18px;
   text-align: left;
 }
 
 .branding {
-  font-size: 14px; /* Default font-size for desktop */
+  font-size: 14px;
   color: #777;
   text-align: left;
 }
