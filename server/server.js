@@ -1,7 +1,6 @@
 // server/server.js
 import express from "express";
 import cors from "cors";
-import axios from "axios";
 import path from "path";
 import "dotenv/config";
 import { fileURLToPath } from "url";
@@ -26,22 +25,26 @@ app.get("/", (req, res) => {
 
 // Route to handle fetching recommendations
 app.get("/taboola/widgets", async (req, res) => {
-  console.log(app.get);
   try {
-    const response = await axios.get(process.env.BASE_URL, {
-      params: {
-        "app.type": "desktop",
-        "app.apikey": process.env.API_KEY,
-        count: 6,
-        "source.type": "video",
-        "source.id": "123456",
-        "source.url": "http://www.site.com/videos/123456.html",
-      },
-    });
+    const params = {
+      "app.type": "desktop",
+      "app.apikey": process.env.API_KEY,
+      count: 6,
+      "source.type": "video",
+      "source.id": "123456",
+      "source.url": "http://www.site.com/videos/123456.html",
+    };
 
-    res.json(response.data);
+    const queryString = new URLSearchParams(params).toString();
+    const response = await fetch(`${process.env.BASE_URL}?${queryString}`);
+
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error("Error fetching data from Taboola API:", error);
     res.status(500).send("Error fetching data from Taboola API");
   }
 });
@@ -52,21 +55,25 @@ app.get("/test/widgets", async (req, res) => {
     const { apikey, appType, sourceType, sourceId, sourceUrl, count } =
       req.query;
 
-    const response = await axios.get(process.env.BASE_URL, {
-      params: {
-        "app.type": appType || "desktop",
-        "app.apikey": apikey || process.env.API_KEY,
-        count: count || 6,
-        "source.type": sourceType || "video",
-        "source.id": sourceId || "123456",
-        "source.url": sourceUrl || "http://www.site.com/videos/123456.html",
-      },
-    });
+    const params = {
+      "app.type": appType || "desktop",
+      "app.apikey": apikey || process.env.API_KEY,
+      count: count || 6,
+      "source.type": sourceType || "video",
+      "source.id": sourceId || "123456",
+      "source.url": sourceUrl || "http://www.site.com/videos/123456.html",
+    };
 
-    // Respond with the data from the API
-    res.json(response.data);
+    const queryString = new URLSearchParams(params).toString();
+    const response = await fetch(`${process.env.BASE_URL}?${queryString}`);
+
+    if (!response.ok) {
+      console.error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error("Error fetching data from Taboola API:");
     res.status(500).send("Error fetching data from Taboola API");
   }
 });
