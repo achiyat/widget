@@ -22,7 +22,7 @@ This project involves creating a recommendation widget using the Taboola REST AP
     ```
     
 2. **Set up environment variables:**
-    - Create a `.env` file in the `server` directory with the following content:
+    - Create a `.env` file in the root of the project with the following content:
     ```plaintext
     PIXABAY_API_KEY=your_pixabay_api_key
     PORT=3000
