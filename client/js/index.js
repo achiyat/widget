@@ -9,43 +9,48 @@ const design = {
   layers: renderLayerDesign,
 };
 
+const typeDesign = {
+  article: "article",
+  list: "list",
+  layers: "layers",
+};
+
+// Choose a design type: 'article', 'list', or 'layers'
+const DESIGN_TYPE = typeDesign.list;
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const recommendations = await getWidgetFromAPI();
-    if (recommendations) {
-      // Choose a design type: 'article', 'list', or 'layers'
-      const designType = "article";
-      renderWidget(recommendations, designType);
+    const widgetData = await getWidgetFromAPI();
+    if (widgetData) {
+      renderWidget(widgetData, DESIGN_TYPE);
     }
   } catch (error) {
-    console.error("Error loading recommendations:", error);
+    console.error("Error loading widgetData:", error);
   }
 });
 
 export const renderWidget = (data, designType) => {
-  const widgetContainer = document.getElementById("widget-container");
+  const widgetContainer = document.getElementById(window.widgetId);
 
   // Clear existing content
   widgetContainer.innerHTML = "";
 
   data.list.forEach((item) => {
-    const recommendationItem = document.createElement("div");
+    const containerItem = document.createElement("div");
 
     // Apply the selected design type
-    design[designType](item, recommendationItem);
+    design[designType](item, containerItem);
 
     // Event listener for click behavior
-    if (item.origin === "sponsored") {
-      recommendationItem.addEventListener("click", () => {
+    containerItem.addEventListener("click", () => {
+      if (item.origin === "sponsored") {
         window.open(item.url, "_blank");
-      });
-    } else {
-      recommendationItem.addEventListener("click", () => {
+      } else {
         window.location.href = item.url;
-      });
-    }
+      }
+    });
 
-    widgetContainer.appendChild(recommendationItem);
+    widgetContainer.appendChild(containerItem);
   });
 };
 
@@ -54,8 +59,7 @@ export function renderArticleDesign(item, container) {
   container.classList.add("article-design");
 
   // Media (image, gif, video) - top of the card
-  const mediaElement = getMediaElement(item.thumbnail[0].url);
-  mediaElement.classList.add("media");
+  const mediaElement = createMediaElement(item);
   container.appendChild(mediaElement);
 
   // Content container for the title and branding - bottom of the card
@@ -63,15 +67,11 @@ export function renderArticleDesign(item, container) {
   contentContainer.classList.add("content-container");
 
   // Article name (inside the content container)
-  const title = document.createElement("p");
-  title.textContent = truncateText(item.name);
-  title.classList.add("article-title");
+  const title = createTitleElement(item);
   contentContainer.appendChild(title);
 
   // Branding (inside the content container)
-  const branding = document.createElement("p");
-  branding.textContent = item.branding;
-  branding.classList.add("branding");
+  const branding = createBrandingElement(item);
   contentContainer.appendChild(branding);
 
   // Append content container to the main container
@@ -83,22 +83,17 @@ export function renderListDesign(item, container) {
   container.classList.add("list-design");
 
   // Media on the left
-  const mediaElement = getMediaElement(item.thumbnail[0].url);
-  mediaElement.classList.add("media");
+  const mediaElement = createMediaElement(item);
   container.appendChild(mediaElement);
 
   // Content on the right
   const contentDiv = document.createElement("div");
   contentDiv.classList.add("content");
 
-  const title = document.createElement("p");
-  title.textContent = truncateText(item.name, 50);
-  title.classList.add("article-title");
+  const title = createTitleElement(item);
   contentDiv.appendChild(title);
 
-  const branding = document.createElement("p");
-  branding.textContent = item.branding;
-  branding.classList.add("branding");
+  const branding = createBrandingElement(item);
   contentDiv.appendChild(branding);
 
   container.appendChild(contentDiv);
@@ -113,33 +108,23 @@ export function renderLayerDesign(item, container) {
   mediaContainer.classList.add("media-container");
 
   // Media (image or video)
-  const mediaElement = getMediaElement(item.thumbnail[0]?.url || "");
+  const mediaElement = createMediaElement(item);
+  mediaContainer.appendChild(mediaElement);
 
-  if (mediaElement) {
-    mediaElement.classList.add("media");
-    mediaContainer.appendChild(mediaElement);
-  }
-
-  // Title overlay (this will stay at the bottom of the mediaContainer)
+  // Title overlay on the image
   const titleOverlay = document.createElement("div");
   titleOverlay.classList.add("title-overlay");
 
-  const title = document.createElement("p");
-  title.textContent = truncateText(item.name);
-  title.classList.add("article-title");
+  const title = createTitleElement(item);
   titleOverlay.appendChild(title);
 
   mediaContainer.appendChild(titleOverlay);
 
-  // Append the media container (wrapping both image and title) to the main container
+  // Append the media container to the main container (top of the card)
   container.appendChild(mediaContainer);
 
   // Branding and time (at the bottom of the card)
-  const branding = document.createElement("p");
-  branding.textContent = `${item.branding} | ${getTimeAgo(item.created)}`;
-  branding.classList.add("branding");
-
-  // Append branding to the main container
+  const branding = createBrandingElement(item);
   container.appendChild(branding);
 }
 
@@ -148,7 +133,7 @@ export const getMediaElement = (url) => {
   const extension = url.split(".").pop();
   let element;
 
-  if (extension === "mp4") {
+  if (["mp4", "webm", "ogg"].includes(extension)) {
     element = document.createElement("video");
     element.src = url;
     element.autoplay = true; // start playing
@@ -164,25 +149,51 @@ export const getMediaElement = (url) => {
   return element;
 };
 
-// Function to truncate text after a specified number of characters
-export const truncateText = (text, maxLength = 60) => {
-  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-};
-
 // Function to calculate time ago
-export const getTimeAgo = (createdDate) => {
+const getTimeAgo = (createdDate) => {
   const now = new Date();
   const created = new Date(createdDate);
   const diffInSeconds = Math.floor((now - created) / 1000);
 
   if (diffInSeconds < 3600) {
-    const hours = Math.floor(diffInSeconds / 3600);
-    return `${hours} hours ago`;
+    return strTimeAgo(diffInSeconds, 60, "minute");
   } else if (diffInSeconds < 86400) {
-    const days = Math.floor(diffInSeconds / 86400);
-    return `${days} days ago`;
+    return strTimeAgo(diffInSeconds, 3600, "hour");
+  } else if (diffInSeconds < 604800) {
+    return strTimeAgo(diffInSeconds, 86400, "day");
+  } else if (diffInSeconds < 31536000) {
+    return strTimeAgo(diffInSeconds, 604800, "week");
   } else {
-    const weeks = Math.floor(diffInSeconds / 604800);
-    return `${weeks} weeks ago`;
+    return strTimeAgo(diffInSeconds, 31536000, "year");
   }
+};
+
+// Helper function to format the time
+const strTimeAgo = (seconds, unitInSeconds, unitName) => {
+  const time = Math.floor(seconds / unitInSeconds);
+  return `${time} ${unitName}${time !== 1 ? "s" : ""} ago`;
+};
+
+const createMediaElement = (item) => {
+  const mediaElement = getMediaElement(item.thumbnail[0].url);
+  mediaElement.classList.add("media");
+  return mediaElement;
+};
+
+const createTitleElement = (item) => {
+  const title = document.createElement("p");
+  title.textContent = item.name;
+  title.classList.add("title");
+  return title;
+};
+
+export const createBrandingElement = (item) => {
+  const branding = document.createElement("p");
+  if (DESIGN_TYPE === "layers") {
+    branding.textContent = `${item.branding} | ${getTimeAgo(item.created)}`;
+  } else {
+    branding.textContent = item.branding;
+  }
+  branding.classList.add("branding");
+  return branding;
 };

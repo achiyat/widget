@@ -5,15 +5,16 @@ export const mockData = {
       type: "video",
       thumbnail: [
         {
-          url: "http://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A%2F%2Fwww.autoweb.cz%2Fwp-content%2Fuploads%2F2018%2F11%2F01_grand_tour/jpg",
+          url: "http://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A%2F%2Fwww.autoweb.cz%2Fwp-content%2Fuploads%2F2018%2F11%2F01_grand_tour.jpg",
           width: "1366",
           height: "768",
         },
       ],
       description:
         "Jsou starší, jsou lehce strhanější, ale pořád mají síly na rozdávání. Během natáčení trousí jednu suchou britskou hlášku za druhou, ovšem když je posadíte za volant, začnou se dít věci!  Jezza, Hammond a Captain Slow jsou zpět se třetí řadou své americké show.",
-      name: "Třetí řada The Grand Tour se blíží. Nabízí se otázka: Bude pro slavné moderátory poslední? - Autoweb.cz",
-      created: "Tue, 04 Dec 2018 13:00:42 UTC",
+      // name: "Třetí řada The Grand Tour se blíží. Nabízí se otázka: Bude pro slavné moderátory poslední? - Autoweb.cz",
+      name: "Třetí řada The Grand Tour se blíží. Nabízí se otázka: Bude pro slavné moderátory poslední? - Autoweb.cz jhnkl.jlkjm kldsjkljolsdj ihkdkljaklajd hdjkah kahkhklj khfekljkae khkaj",
+      created: "Sun, 08 Sep 2024 04:00:42 GMT",
       branding: "AutoWeb",
       duration: "0",
       views: "0",
@@ -32,7 +33,7 @@ export const mockData = {
         },
       ],
       name: "VÉGRE MAGYARORSZÁGON: Drónok profi funkciókkal a hivatalos árak tizedéért... Így juthatsz hozzá egyhez",
-      created: "Sun, 10 Feb 2019 15:59:16 UTC",
+      created: "Tue, 10 Sep 2024 09:00:42 GMT",
       branding: "DroneXPro",
       duration: "0",
       views: "0",
@@ -51,7 +52,7 @@ export const mockData = {
       description:
         "Avrupalı turistlerin bu yıl bombalı saldırılar, mülteci krizi ve Suriye'deki çatışmalar nedeniyle, Türkiye, Mısır ve Tunus gibi ülkelerin yerine, daha güvenli ülkeleri tercih edeceği belirtiliyor. Güvenlik endişeleri nedeniyle Avrupalı turistlerin öncelikli tercihi, İspanya ve Portekiz.",
       name: "Avrupalı turistin tercihi güvenlik - Milliyet Haber",
-      created: "Tue, 26 Jan 2016 07:20:13 UTC",
+      created: "Tue, 03 Sep 2024 10:00:42 GMT",
       branding: "milliyet",
       duration: "0",
       views: "0",
@@ -70,7 +71,7 @@ export const mockData = {
         },
       ],
       name: "Best New Products",
-      created: "Mon, 11 Feb 2019 06:52:28 UTC",
+      created: "Tue, 20 Sep 2022 12:00:42 GMT",
       branding: "AudiPlus 247",
       duration: "0",
       views: "0",
@@ -100,7 +101,8 @@ export const mockData = {
       type: "video",
       thumbnail: [
         {
-          url: "http://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A%2F%2Fsv.nyt.com%2Fimages%2F2012%2F09%2F08%2Fautomobiles%2Fvideo-bdl-paris-auto%2Fvideo-bdl-paris-auto-videoSmall.jpg",
+          //url: "http://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A%2F%2Fsv.nyt.com%2Fimages%2F2012%2F09%2F08%2Fautomobiles%2Fvideo-bdl-paris-auto%2Fvideo-bdl-paris-auto-videoSmall.jpg",
+          url: "",
         },
       ],
       name: "Forging Ahead at the Paris Auto Show",

@@ -46,9 +46,14 @@ video {
   object-fit: cover;
 }
 
-.article-title {
+.title {
   font-size: 18px;
   text-align: left;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }
 
 .branding {
@@ -71,7 +76,7 @@ video {
     font-size: 22px;
   }
 
-  .article-title {
+  .title {
     font-size: 17px;
   }
 
@@ -93,7 +98,7 @@ video {
     font-size: 20px;
   }
 
-  .article-title {
+  .title {
     font-size: 16px;
   }
 
@@ -115,7 +120,7 @@ video {
     font-size: 18px;
   }
 
-  .article-title {
+  .title {
     font-size: 15px;
   }
 
@@ -137,7 +142,7 @@ video {
     font-size: 16px;
   }
 
-  .article-title {
+  .title {
     font-size: 14px;
   }
 
@@ -151,7 +156,7 @@ video {
     font-size: 14px;
   }
 
-  .article-title {
+  .title {
     font-size: 13px;
   }
 
